@@ -15,7 +15,12 @@ DATABASE_URL = st.secrets["DATABASE_URL"]
 
 
 def get_connection():
-    return psycopg2.connect(DATABASE_URL, cursor_factory=RealDictCursor)
+    return psycopg2.connect(
+        DATABASE_URL,
+        cursor_factory=RealDictCursor,
+        sslmode="require",
+        connect_timeout=15
+    )
 
 
 def load_data():
